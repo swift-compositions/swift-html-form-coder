@@ -1,9 +1,10 @@
-import Byte_Primitive
+import Byte
 import Foundation
 import HTML_Form_Coder
 import HTML_Form_Coder_Multipart
 import HTML_Standard
-import HTTP_Body
+import HTTP_Router
+import RFC_9110
 import RFC_2045
 import RFC_2046
 import Testing
@@ -52,7 +53,7 @@ struct MultipartCoderParityTests {
         let coder = HTML.Form.Coder.Multipart(boundary: boundary)
         var bodyBytes: [Byte] = []
         let contentType = try coder.encode(formData, into: &bodyBytes)
-        let body = String(decoding: bodyBytes.map(\.underlying), as: UTF8.self)
+        let body = String(decoding: bodyBytes.map(\.bitPattern), as: UTF8.self)
         Corpus.compare(body, named: "multipart-body")
 
         // Encode: the Content-Type value the encoder exposes.

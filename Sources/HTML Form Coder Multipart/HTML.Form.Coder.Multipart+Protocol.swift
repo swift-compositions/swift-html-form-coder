@@ -1,12 +1,15 @@
-public import Byte_Primitive
+public import Byte
 public import HTML_Form_Coder
 public import HTML_Standard
-public import HTTP_Body
+public import HTTP
+public import HTTP_Router
+public import RFC_9110
 internal import Media_Type_Standard
 public import RFC_2046
+import RFC_2046_Coder
 public import WHATWG_HTML_FormData
 
-extension HTML.Form.Coder.Multipart: RFC_9110.Body.Coder.`Protocol` {
+extension HTML.Form.Coder.Multipart: HTTP.Body.Coder.`Protocol` {
     public typealias Input = [Byte]
     public typealias Buffer = [Byte]
     public typealias Output = HTML.Form.Data.Entry.List
@@ -73,9 +76,10 @@ extension HTML.Form.Coder.Multipart: RFC_9110.Body.Coder.`Protocol` {
     ) throws(HTML.Form.Coder.Multipart.Error) -> HTML.Form.Data.Entry.List {
         let multipart: RFC_2046.Multipart
         do throws(RFC_2046.Multipart.Error) {
-            multipart = try RFC_2046.Multipart.parse(
-                from: input,
-                parser: RFC_2046.Multipart.Parser(boundary: boundary, subtype: .formData)
+            multipart = try RFC_2046.Multipart(
+                binary: input,
+                boundary: boundary,
+                subtype: .formData
             )
         } catch {
             throw .multipart(error)

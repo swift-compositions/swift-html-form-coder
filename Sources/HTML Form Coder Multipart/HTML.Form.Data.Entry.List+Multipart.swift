@@ -1,10 +1,11 @@
-public import Byte_Primitive
+import Byte
 public import HTML_Form_Coder
 public import HTML_Standard
-public import RFC_2045
+import RFC_2045
+import RFC_2045_Coder
 public import RFC_2046
-public import RFC_2183
-public import RFC_7578
+import RFC_2183
+import RFC_7578
 public import WHATWG_HTML_FormData
 
 extension HTML.Form.Data.Entry.List {
@@ -62,7 +63,7 @@ extension HTML.Form.Data.Entry.List {
                             contentDisposition: .formData(name: entry.name),
                             contentType: .textPlainUTF8
                         ),
-                        content: RFC_2046.BodyPart.Content([Byte](value.utf8))
+                        content: RFC_2046.BodyPart.Content(value.utf8.map(Byte.init(bitPattern:)))
                     )
                 )
 
@@ -106,7 +107,7 @@ extension HTML.Form.Data.Entry.List {
                             ),
                             contentType: file.contentType
                         ),
-                        content: RFC_2046.BodyPart.Content(file.content.map(Byte.init))
+                        content: RFC_2046.BodyPart.Content(file.content.map(Byte.init(bitPattern:)))
                     )
                 )
             }

@@ -2,7 +2,7 @@ public import HTML_Form_Coder
 public import HTML_Standard
 public import Parser
 
-extension HTML.Form.Coder.Nested.Data.Parse.Pairs: Parser.`Protocol` {
+extension HTML.Form.Coder.Nested.Data.Parse.Pairs: Parsing {
     public typealias Failure = Never
 
     @inlinable

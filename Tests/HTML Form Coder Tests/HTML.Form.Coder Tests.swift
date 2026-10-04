@@ -1,4 +1,4 @@
-import Byte_Primitive
+import Byte
 import HTML_Form_Coder
 import HTML_Standard
 import Testing
@@ -21,7 +21,7 @@ extension HTML.Form.Coder.Test {
         var bytes: [Byte] = []
 
         coder.serialize(expected, into: &bytes)
-        let wire = String(decoding: bytes.map(\.underlying), as: UTF8.self)
+        let wire = String(decoding: bytes.map(\.bitPattern), as: UTF8.self)
         let actual = coder.parse(&bytes)
 
         #expect(wire == "name=Blob+McBlob&tag=swift&tag=server+side")

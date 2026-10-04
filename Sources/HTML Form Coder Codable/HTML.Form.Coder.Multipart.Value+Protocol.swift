@@ -1,16 +1,20 @@
+public import Byte
 public import Foundation
 public import HTML_Form_Coder
 public import HTML_Form_Coder_Multipart
 public import HTML_Standard
-public import HTTP_Body
+public import HTTP
+public import HTTP_Router
+public import RFC_9110
 import Media_Type_Standard
 import RFC_2045
+import RFC_2045_Coder
 import RFC_2046
 import RFC_2183
 import RFC_7578
 public import WHATWG_HTML_FormData
 
-extension HTML.Form.Coder.Multipart.Value: RFC_9110.Body.Coder.`Protocol` {
+extension HTML.Form.Coder.Multipart.Value: HTTP.Body.Coder.`Protocol` {
     public typealias Input = [Byte]
     public typealias Buffer = [Byte]
     public typealias Failure = HTML.Form.Coder.Error
@@ -42,7 +46,7 @@ extension HTML.Form.Coder.Multipart.Value: RFC_9110.Body.Coder.`Protocol` {
             HTML.Form.Coder().serialize(entries, into: &bytes)
             return try decoder.decode(
                 Output.self,
-                from: Foundation.Data(bytes.map(\.underlying))
+                from: Foundation.Data(bytes.map(\.bitPattern))
             )
         } catch {
             throw .coding(String(describing: error))
@@ -105,7 +109,7 @@ extension HTML.Form.Coder.Multipart.Value: RFC_9110.Body.Coder.`Protocol` {
             HTML.Form.Coder().serialize(entries, into: &bytes)
             return try decoder.decode(
                 Output.self,
-                from: Foundation.Data(bytes.map(\.underlying))
+                from: Foundation.Data(bytes.map(\.bitPattern))
             )
         } catch {
             throw .coding(String(describing: error))
