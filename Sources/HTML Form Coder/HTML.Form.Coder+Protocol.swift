@@ -1,4 +1,5 @@
 public import Byte
+public import Coder
 public import HTML_Standard
 public import HTTP
 public import HTTP_Router
@@ -12,15 +13,6 @@ extension HTML.Form.Coder: HTTP.Body.Coder.`Protocol` {
     public typealias Output = HTML.Form.Data.Entry.List
     public typealias Failure = Never
     public typealias Body = Never
-
-    @inlinable
-    public var body: Never {
-        borrowing get {
-            return fatalError(
-                "leaf codec — parse(_:) and serialize(_:into:) are implemented directly"
-            )
-        }
-    }
 
     public static var contentType: HTTP.MediaType { .formUrlEncoded }
 

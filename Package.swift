@@ -22,6 +22,7 @@ let package = Package(
         .package(url: "https://github.com/swift-whatwg/swift-whatwg-html.git", branch: "main"),
         .package(url: "https://github.com/swift-whatwg/swift-whatwg-url.git", branch: "main"),
         .package(url: "https://github.com/swift-compositions/swift-http-router.git", branch: "main"),
+        .package(url: "https://github.com/swift-atoms/swift-coder.git", branch: "main", traits: ["Checkpoint", "Optic", "Skip", "Byte", "Operation", "Map"]),
         .package(url: "https://github.com/swift-standards/swift-http.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-9110.git", branch: "main"),
         .package(
@@ -42,6 +43,7 @@ let package = Package(
         .target(
             name: "HTML Form Coder",
             dependencies: [
+                .product(name: "Coder", package: "swift-coder"),
                 .product(name: "HTML Standard", package: "swift-html-standard"),
                 .product(name: "WHATWG HTML FormData", package: "swift-whatwg-html"),
                 .product(name: "WHATWG Form URL Encoded", package: "swift-whatwg-url"),
@@ -54,6 +56,7 @@ let package = Package(
         .target(
             name: "HTML Form Coder Multipart",
             dependencies: [
+                .product(name: "Coder", package: "swift-coder"),
                 "HTML Form Coder",
                 .product(name: "HTML Standard", package: "swift-html-standard"),
                 .product(name: "WHATWG HTML FormData", package: "swift-whatwg-html"),
@@ -83,6 +86,7 @@ let package = Package(
         .target(
             name: "HTML Form Coder Codable",
             dependencies: [
+                .product(name: "Coder", package: "swift-coder"),
                 "HTML Form Coder",
                 "HTML Form Coder Multipart",
                 "HTML Form Coder Nested",

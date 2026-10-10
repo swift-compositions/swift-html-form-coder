@@ -1,4 +1,5 @@
 public import Byte
+public import Coder
 public import Foundation
 public import HTML_Form_Coder
 public import HTML_Form_Coder_Multipart
@@ -19,14 +20,6 @@ extension HTML.Form.Coder.Multipart.Value: HTTP.Body.Coder.`Protocol` {
     public typealias Buffer = [Byte]
     public typealias Failure = HTML.Form.Coder.Error
     public typealias Body = Never
-
-    public var body: Never {
-        borrowing get {
-            return fatalError(
-                "leaf codec — parse(_:) and serialize(_:into:) are implemented directly"
-            )
-        }
-    }
 
     public static var contentType: HTTP.MediaType { .formData }
 
