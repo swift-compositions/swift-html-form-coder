@@ -76,7 +76,7 @@ struct FormDataConversionTests {
         // Check file field exists in parts
         let hasAvatarPart = multipart.parts.contains { part in
             guard let disposition = part.headers.contentDisposition else { return false }
-            return disposition.name == "avatar"
+            return disposition.name?.value == "avatar"
                 && disposition.filename?.value == "photo.jpg"
         }
         #expect(hasAvatarPart)

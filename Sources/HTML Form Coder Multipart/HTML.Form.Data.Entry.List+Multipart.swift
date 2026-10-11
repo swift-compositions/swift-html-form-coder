@@ -60,7 +60,7 @@ extension HTML.Form.Data.Entry.List {
                 parts.append(
                     RFC_2046.BodyPart(
                         headers: RFC_2046.BodyPart.Headers(
-                            contentDisposition: .formData(name: entry.name),
+                            contentDisposition: .formData(name: try Self.fieldName(entry.name)),
                             contentType: .textPlainUTF8
                         ),
                         content: RFC_2046.BodyPart.Content(value.utf8.map(Byte.init(bitPattern:)))
@@ -102,7 +102,7 @@ extension HTML.Form.Data.Entry.List {
                     RFC_2046.BodyPart(
                         headers: RFC_2046.BodyPart.Headers(
                             contentDisposition: .formData(
-                                name: file.fieldName,
+                                name: try Self.fieldName(file.fieldName),
                                 filename: file.filename
                             ),
                             contentType: file.contentType
@@ -121,6 +121,18 @@ extension HTML.Form.Data.Entry.List {
             )
         } catch {
             throw .multipart(error)
+        }
+    }
+}
+
+extension HTML.Form.Data.Entry.List {
+    private static func fieldName(
+        _ name: String
+    ) throws(HTML.Form.Coder.Multipart.Error) -> RFC_2183.ParameterValue {
+        do throws(RFC_2183.ParameterValue.Error) {
+            return try RFC_2183.ParameterValue(name)
+        } catch {
+            throw .media("\(error)")
         }
     }
 }
