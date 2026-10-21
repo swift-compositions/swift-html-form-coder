@@ -169,12 +169,11 @@ extension HTML.Form.Coder.Multipart {
                 var files: [RFC_7578.Form.Data.File] = []
 
                 for element in array {
-                    if let file = fileExtractor(element) {
-                        files.append(file)
-                    } else {
+                    guard let file = fileExtractor(element) else {
                         allFiles = false
                         break
                     }
+                    files.append(file)
                 }
 
                 if allFiles && !files.isEmpty {

@@ -18,8 +18,7 @@ extension HTML.Form.Coder.Decoder {
             return self.container.keys.compactMap(Key.init(stringValue:))
         }
 
-        private func checked<T>(_ key: Key, _ block: (String) throws(Error) -> T) throws(Error) -> T
-        {
+        private func checked<T>(_ key: Key, _ block: (String) throws(Error) -> T) throws(Error) -> T {
             guard let value = self.container[key.stringValue].flatMap(self.decoder.unbox) else {
                 throw Error.decodingError(
                     "Expected \(T.self) at \(key), got nil",

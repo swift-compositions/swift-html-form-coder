@@ -8,7 +8,10 @@ extension HTML.Form.Coder {
     public final class Decoder: Swift.Decoder {
         package var containers: [Container] = []
         package var container: Container {
-            return containers.last!
+            guard let last = containers.last else {
+                preconditionFailure("The decoder always holds at least its root container")
+            }
+            return last
         }
         // reason: stdlib Codable protocol requirement forces this existential (any CodingKey / Encoder / Decoder / *Container); the conforming type cannot narrow it.
         // swiftlint:disable:next no_any_protocol_existential
@@ -54,9 +57,8 @@ extension HTML.Form.Coder {
                 // For accumulateValues strategy, handle both single values and arrays
                 // If it's an array, take the last value; if it's a single value, return it
                 return container.values?.last?.value ?? container.value
-            } else {
-                return container.value
             }
+            return container.value
         }
 
         package func unbox(
@@ -183,12 +185,11 @@ extension HTML.Form.Coder {
                         container: container,
                         codingPath: self.codingPath
                     )
-                } else {
-                    throw Error.decodingError(
-                        "Expected unkeyed container, got \(self.container)",
-                        self.codingPath
-                    )
                 }
+                throw Error.decodingError(
+                    "Expected unkeyed container, got \(self.container)",
+                    self.codingPath
+                )
 
             default:
                 throw Error.decodingError(

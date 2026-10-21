@@ -37,9 +37,8 @@ extension HTML.Form.Coder.Nested.Data {
 
         if percentEncode {
             return WHATWG_Form_URL_Encoded.PercentEncoding.encode(raw, space: .plus)
-        } else {
-            return raw
         }
+        return raw
     }
 
     /// Recursively encodes HTML.Form.Coder.Nested.Data with a given prefix and strategy.

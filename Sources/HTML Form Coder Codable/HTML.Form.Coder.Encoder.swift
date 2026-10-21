@@ -90,9 +90,8 @@ extension HTML.Form.Coder {
                     throw Error.encodingError("No container found", encoder.codingPath)
                 }
                 return container
-            } else {
-                return .singleValue(result)
             }
+            return .singleValue(result)
         }
 
         package func box(_ data: Foundation.Data) throws(Error) -> Container {
@@ -110,9 +109,8 @@ extension HTML.Form.Coder {
                     throw Error.encodingError("No container found", encoder.codingPath)
                 }
                 return container
-            } else {
-                return .singleValue(result)
             }
+            return .singleValue(result)
         }
 
         public func container<Key>(keyedBy type: Key.Type) -> KeyedEncodingContainer<Key>
