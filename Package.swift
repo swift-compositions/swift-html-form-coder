@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/swift-standards/swift-html-standard.git", branch: "main"),
         .package(url: "https://github.com/swift-whatwg/swift-whatwg-html.git", branch: "main"),
         .package(url: "https://github.com/swift-whatwg/swift-whatwg-url.git", branch: "main"),
-        .package(url: "https://github.com/swift-compositions/swift-http-router.git", branch: "main"),
+        .package(url: "https://github.com/coenttb/swift-http-router.git", branch: "main"),
         .package(url: "https://github.com/swift-atoms/swift-coder.git", branch: "main", traits: ["Checkpoint", "Optic", "Skip", "Byte", "Operation", "Map"]),
         .package(url: "https://github.com/swift-standards/swift-http.git", branch: "main"),
         .package(url: "https://github.com/swift-ietf/swift-rfc-9110.git", branch: "main"),
