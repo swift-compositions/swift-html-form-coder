@@ -2,7 +2,6 @@ import Byte
 public import HTML_Form_Coder
 public import HTML_Standard
 import RFC_2045
-import RFC_2045_Coder
 public import RFC_2046
 import RFC_2183
 import RFC_7578

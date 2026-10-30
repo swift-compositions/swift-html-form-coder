@@ -6,7 +6,6 @@ public import HTTP
 public import HTTP_Router
 internal import Media_Type_Standard
 public import RFC_2046
-import RFC_2046_Coder
 public import RFC_9110
 public import WHATWG_HTML_FormData
 

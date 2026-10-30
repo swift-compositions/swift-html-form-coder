@@ -8,7 +8,6 @@ public import HTTP
 public import HTTP_Router
 import Media_Type_Standard
 import RFC_2045
-import RFC_2045_Coder
 import RFC_2046
 import RFC_2183
 import RFC_7578
